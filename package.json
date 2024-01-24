@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.9",
+    "@egjs/flicking": "^4.11.2",
     "@egjs/react-flicking": "^4.11.0",
     "@formatjs/intl-localematcher": "^0.4.2",
     "@headlessui/react": "^1.7.17",

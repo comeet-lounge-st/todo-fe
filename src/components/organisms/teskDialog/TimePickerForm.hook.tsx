@@ -1,7 +1,6 @@
 import { useClientTranslation } from '@/libs/i18n/useClientTranslation';
 import { AddTask, TASK_FORM_STEP, Task } from '@/types/task/task.type';
-import Flicking, { ChangedEvent, ReadyEvent } from '@egjs/flicking';
-import { MoveEvent } from '@egjs/react-flicking';
+import Flicking, { ChangedEvent, MoveEvent, ReadyEvent } from '@egjs/react-flicking';
 import React, { useState } from 'react';
 
 export const useTimePickerForm = (
