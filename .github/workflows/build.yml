@@ -13,7 +13,9 @@ on:
   workflow_dispatch:
 
 env:
-  API_KEY: ${{ secrets.API_KEY }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET }}
+  NEXT_PUBLIC_MONGODB_URL: ${{ secrets.NEXT_PUBLIC_MONGODB_URL }}
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
