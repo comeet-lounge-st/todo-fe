@@ -26,7 +26,7 @@ jobs:
   build:
     runs-on: [self-hosted]
     container:
-      image: ghcr.io/github/super-linter:latest
+      image: node:20
       options: --user root
 
     steps:
@@ -46,11 +46,11 @@ jobs:
         with:
           version: 6.32.9
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
+      #     cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Restore cache
         uses: actions/cache@v3
