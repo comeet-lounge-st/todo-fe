@@ -144,6 +144,6 @@ jobs:
           envs: GITHUB_SHA
           script: |
             docker ps
-            docker pull ${{ github.repository }}:main
-            docker run -d -p 8082:8082 ${{ github.repository }}:main
+            docker pull ghcr.io/${{ github.repository }}:main
+            docker run -d -p 8082:8082 ghcr.io/${{ github.repository }}:main
             docker image prune -f
