@@ -77,7 +77,7 @@ jobs:
       - name: Dockerfile upload
         uses: actions/upload-artifact@v4
         with:
-          name: dockerfile
+          name: Dockerfile
           path: Dockerfile
 
   docker-image:
