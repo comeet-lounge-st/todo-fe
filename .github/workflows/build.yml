@@ -66,8 +66,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} build
 
       - name: build info
-        run: |
-          echo "ls -al"
+        run: ls -al
 
       - name: Archive artifacts upload
         uses: actions/upload-artifact@v4
