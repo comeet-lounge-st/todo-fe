@@ -142,5 +142,5 @@ jobs:
           script: |
             docker ps
             docker pull ghcr.io/${{ github.repository }}:main
-            docker run -d -p 8082:8082 ghcr.io/${{ github.repository }}:main
+            docker run -d -p 13000:3000 ghcr.io/${{ github.repository }}:main
             docker image prune -f

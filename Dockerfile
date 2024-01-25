@@ -5,6 +5,6 @@ RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN npm install -g pnpm
 RUN pnpm install
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["node", "server.js"]
