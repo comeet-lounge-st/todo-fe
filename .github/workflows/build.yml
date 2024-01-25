@@ -66,6 +66,7 @@ jobs:
         run: |
           ${{ steps.detect-package-manager.outputs.manager }} build
           cp -R public .next/standalone/
+          cp -R .next/static .next/static/
 
       - name: Archive artifacts upload
         uses: actions/upload-artifact@v4
@@ -140,7 +141,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker ps
+            docker stop todo-fe
+            docker rm todo-fe
             docker pull ghcr.io/${{ github.repository }}:main
-            docker run -d -p 13000:3000 ghcr.io/${{ github.repository }}:main
+            docker run -d -p 13000:3000 ghcr.io/${{ github.repository }}:main --name todo-fe
             docker image prune -f
