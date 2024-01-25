@@ -72,6 +72,7 @@ jobs:
           path: .next/standardalone # 빌드된 파일들이 있는 디렉토리를 지정
 
   docker-image:
+    needs: build
     runs-on: [self-hosted]
     steps:
       - name: Archive artifacts download
