@@ -83,6 +83,9 @@ jobs:
   docker-image:
     needs: build
     runs-on: [self-hosted]
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Archive artifacts download
         uses: actions/download-artifact@v4
