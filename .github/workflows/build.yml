@@ -144,5 +144,5 @@ jobs:
             docker stop todo-fe
             docker rm todo-fe
             docker pull ghcr.io/${{ github.repository }}:main
-            docker run -d -p 13000:3000 ghcr.io/${{ github.repository }}:main --name todo-fe
+            docker run -d -p 13000:3000 --name todo-fe ghcr.io/${{ github.repository }}:main
             docker image prune -f
