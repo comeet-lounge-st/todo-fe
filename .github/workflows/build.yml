@@ -44,12 +44,12 @@ jobs:
           exit 0
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup
         with:
           version: 8
 
       - name: Restore cache
-        uses: actions/cache@v3
+        uses: actions/cache
         with:
           path: |
             .next/cache
