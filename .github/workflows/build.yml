@@ -139,7 +139,6 @@ jobs:
           username: todo
           port: 30022
           key: ${{ secrets.PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
           envs: GITHUB_SHA
           script: |
             docker ps
