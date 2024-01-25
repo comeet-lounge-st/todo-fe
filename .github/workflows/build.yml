@@ -28,7 +28,7 @@ jobs:
   build:
     runs-on: [self-hosted]
     container:
-      image: node:20
+      image: node:20.11-slim
       options: --user root
 
     steps:
@@ -80,7 +80,7 @@ jobs:
           name: Dockerfile
           path: Dockerfile
 
-  docker-image:
+  docker-build:
     needs: build
     runs-on: [self-hosted]
     permissions:
@@ -132,6 +132,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+  deploy:
+    needs: docker-build
+    runs-on: [self-hosted]
+    steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
