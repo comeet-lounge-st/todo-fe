@@ -131,3 +131,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Deploy to prod
+        uses: appleboy/ssh-action@master
+        id: deploy-prod
+        if: contains(github.ref, 'main')
+        with:
+          host: ${{ secrets.HOST }}
+          username: todo
+          port: 30022
+          key: ${{ secrets.PRIVATE_KEY }}
+          envs: GITHUB_SHA
+          script: |
+            docker ps
+            docker pull ${{ github.repository }}:main
+            docker run -d -p 8082:8082 ${{ github.repository }}:main
+            docker image prune -f
