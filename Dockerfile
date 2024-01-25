@@ -6,7 +6,7 @@ RUN set -eux ; \
     tzdata; \
     ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime; \
 
-ADD  /home/todo/actions-runner/_work/_temp/todo-fe/standardalone /todo-fe
+ADD  /home/todo/actions-runner/_work/_temp/todo-fe/standalone /todo-fe
 
 WORKDIR /todo-fe
 EXPOSE 80
