@@ -71,8 +71,8 @@ jobs:
       - name: Archive artifacts upload
         uses: actions/upload-artifact@v4
         with:
-          name: next-standardAlone
-          path: .next/standardalone # 빌드된 파일들이 있는 디렉토리를 지정
+          name: next-standalone
+          path: .next/standalone # 빌드된 파일들이 있는 디렉토리를 지정
 
       - name: Dockerfile upload
         uses: actions/upload-artifact@v4
@@ -87,8 +87,8 @@ jobs:
       - name: Archive artifacts download
         uses: actions/download-artifact@v4
         with:
-          name: next-standardAlone
-          path: /todo-fe/standardalone
+          name: next-standalone
+          path: /todo-fe/standalone
 
       - name: Dockerfile download
         uses: actions/download-artifact@v4
