@@ -149,7 +149,8 @@ jobs:
           username: todo
           port: 30022
           key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA
+          envs: GITHUB_SHA,NEXTAUTH_SECRET
+
           script: |
             docker stop todo-fe
             docker rm todo-fe
