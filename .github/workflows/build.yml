@@ -144,6 +144,8 @@ jobs:
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
         with:
           host: ${{ secrets.HOST }}
           username: todo
