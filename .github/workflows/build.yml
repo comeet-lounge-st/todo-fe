@@ -65,14 +65,12 @@ jobs:
       - name: Build with Next.js
         run: |
           ${{ steps.detect-package-manager.outputs.manager }} build
-          cp -R public .next/standalone/
-          cp -R .next/static .next/standalone/
 
       - name: Archive artifacts upload
         uses: actions/upload-artifact@v4
         with:
-          name: next-standalone
-          path: .next/standalone # 빌드된 파일들이 있는 디렉토리를 지정
+          name: next-build
+          path: .next
 
       - name: Dockerfile upload
         uses: actions/upload-artifact@v4
@@ -90,14 +88,18 @@ jobs:
       - name: Archive artifacts download
         uses: actions/download-artifact@v4
         with:
-          name: next-standalone
-          path: /home/todo/actions-runner/_work/_temp/todo-fe/standalone
+          name: next-build
+          path: /home/todo/actions-runner/_work/_temp/todo-fe/next
 
       - name: Dockerfile download
         uses: actions/download-artifact@v4
         with:
           name: Dockerfile
           path: /home/todo/actions-runner/_work/_temp/todo-fe/Dockerfile
+
+      - name: Next.js standalone setting
+        run: |
+          mv /home/todo/actions-runner/_work/_temp/todo-fe/next/standalone/ /home/todo/actions-runner/_work/_temp/todo-fe/next
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
