@@ -85,6 +85,10 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Next.js standalone setting
+        run: |
+          rm -rf /home/todo/actions-runner/_work/_temp/todo-fe/*
+
       - name: Archive artifacts download
         uses: actions/download-artifact@v4
         with:
