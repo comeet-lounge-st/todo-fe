@@ -137,6 +137,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          secret-envs: NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
 
   deploy:
     needs: docker-build
@@ -144,14 +145,12 @@ jobs:
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
-        env:
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
         with:
           host: ${{ secrets.HOST }}
           username: todo
           port: 30022
           key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA,NEXTAUTH_SECRET
+          envs: GITHUB_SHA
 
           script: |
             docker stop todo-fe
