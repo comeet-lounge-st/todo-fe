@@ -12,10 +12,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-  MONGODB_URL: ${{ secrets.MONGODB_URL }}
-
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -78,6 +74,7 @@ jobs:
           rm -rf ${{ vars.DOCKER_BUILD_PATH }}/* 
           cp -R ${{ github.workspace }}/Dockerfile ${{ vars.DOCKER_BUILD_PATH }}/
           cp -R ${{ github.workspace }}/.next ${{ vars.DOCKER_BUILD_PATH }}/
+          cp -R ${{ github.workspace }}/.env ${{ vars.DOCKER_BUILD_PATH }}/
           mv ${{ vars.DOCKER_BUILD_PATH }}/.next/standalone/* ${{ vars.DOCKER_BUILD_PATH }}/
 
       - name: Log in to the Container registry
