@@ -13,7 +13,6 @@ on:
   workflow_dispatch:
 
 env:
-  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
   NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET }}
   NEXT_PUBLIC_MONGODB_URL: ${{ secrets.NEXT_PUBLIC_MONGODB_URL }}
 
@@ -114,7 +113,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }},NEXTAUTH_URL=${{ vars.NEXTAUTH_URL }},NEXT_PUBLIC_API_SERVER_URL=${{vars.NEXT_PUBLIC_API_SERVER_URL}}
 
   deploy:
     needs: docker-build
