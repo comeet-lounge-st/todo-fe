@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 env:
-  #build 시 필요
+  #필드 시 사용하여 환경변수에 설정 필요
   MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
