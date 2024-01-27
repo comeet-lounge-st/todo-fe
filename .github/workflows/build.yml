@@ -13,6 +13,7 @@ on:
   workflow_dispatch:
 
 env:
+  #build 시 필요
   MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -113,7 +114,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }},MONGODB_URL=${{ secrets.MONGODB_URL }},GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+            MONGODB_URL=${{ secrets.MONGODB_URL }}
+            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
 
   deploy:
     needs: docker-build
