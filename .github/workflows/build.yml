@@ -38,6 +38,7 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
+          echo ${{ vars.DOCKER_BUILD_PATH }}
           echo "manager=pnpm" >> $GITHUB_OUTPUT
           echo "command=install" >> $GITHUB_OUTPUT
           echo "runner=pnpm" >> $GITHUB_OUTPUT
@@ -66,18 +67,6 @@ jobs:
         run: |
           ${{ steps.detect-package-manager.outputs.manager }} build
 
-      - name: Archive artifacts upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: next-build
-          path: .next
-
-      - name: Dockerfile upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: Dockerfile
-          path: Dockerfile
-
   docker-build:
     needs: build
     runs-on: [self-hosted]
@@ -87,23 +76,9 @@ jobs:
     steps:
       - name: Next.js standalone setting
         run: |
-          rm -rf /home/todo/actions-runner/_work/_temp/todo-fe/*
-
-      - name: Archive artifacts download
-        uses: actions/download-artifact@v4
-        with:
-          name: next-build
-          path: /home/todo/actions-runner/_work/_temp/todo-fe/.next
-
-      - name: Dockerfile download
-        uses: actions/download-artifact@v4
-        with:
-          name: Dockerfile
-          path: /home/todo/actions-runner/_work/_temp/todo-fe/Dockerfile
-
-      - name: Next.js standalone setting
-        run: |
-          mv /home/todo/actions-runner/_work/_temp/todo-fe/.next/standalone/* /home/todo/actions-runner/_work/_temp/todo-fe/
+          rm -rf ${{ vars.DOCKER_BUILD_PATH }}/* 
+          cp -R ${{ github.workspace }}/Dockerfile ${{ vars.DOCKER_BUILD_PATH }}/
+          cp -R ${{ github.workspace }}/.next ${{ vars.DOCKER_BUILD_PATH }}/
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -132,7 +107,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: /home/todo/actions-runner/_work/_temp/todo-fe
+          context: ${{ vars.DOCKER_BUILD_PATH }}
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
